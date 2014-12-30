@@ -104,7 +104,39 @@ testApp.controller('form2Ctrl', ["$scope", "$http", function($scope, $http){
           controller: 'PostsCtrl'
         }
       }
-    })
+   })
+
+      .state('app.Groups', {
+          url: "/Groups",
+          views: {
+              'menuContent': {
+                  templateUrl: "templates/Groups.html",
+                  controller: 'GroupsCtrl',
+                  resolve: {
+                      groups: function (GroupsService) {
+                          return GroupsService.getGroups();
+                      }
+                  }
+              }
+          }
+      })
+
+      .state('app.SingleGroup', {
+          url: "app/Groups/:groupId",
+          views: {
+              'menuContent': {
+                  templateUrl: "templates/SingleGroup.html",
+                  controller: 'SingleGroupCtrl',
+                  resolve: {
+                      group: function ($stateParams, GroupsService) {
+                          console.log($stateParams.groupId);
+                          //                          console.log("group is " + GroupsService.getGroup($stateParams.groupId).name);
+                          return GroupsService.getGroup($stateParams.groupId);
+                      }
+                  }
+              }
+          }
+      })
   
   .state('app.single', {
     url: "/playlists/:playlistId",
@@ -118,7 +150,7 @@ testApp.controller('form2Ctrl', ["$scope", "$http", function($scope, $http){
     
    
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/playlists');
+  $urlRouterProvider.otherwise('/app/Groups');
     
 });
 
