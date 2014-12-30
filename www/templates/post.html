@@ -1,0 +1,29 @@
+<ion-modal-view>
+  <ion-header-bar>
+    <h1 class="title">Post</h1>
+    <div class="buttons">
+      <button class="button button-clear" ng-click="closePost()">Close</button>
+    </div>
+  </ion-header-bar>
+  <ion-content>
+    <form ng-submit="doPost()">
+      <div class="list">
+        <label class="item item-input">
+          <span class="input-label">Title</span>
+          <input type="text" ng-model="postData.title">
+        </label>
+        <label class="item item-input">
+          <span class="input-label">Content</span>
+          <input type="text" ng-model="postData.content">
+        </label>
+        <label class="item">
+          <button class="button button-block button-positive" type="submit">Submit</button>
+        </label>
+      </div>
+    </form>
+      <pre>
+        {{postData}}
+    </pre>
+  </ion-content>
+    
+</ion-modal-view>

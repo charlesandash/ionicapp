@@ -1,0 +1,20 @@
+<ion-view view-title="New User">
+  <ion-content>
+    <body>
+    <h4 align="center">Create User</h4>
+    <form ng-controller="formCtrl" ng-submit="process()" name="userform" id="userform" method="POST">
+    <label>User Name</label>
+    <input type="text" name="uname" ng-model="formData.uname">
+    <label>Password</label>
+    <input type="password" name="pword" ng-model="formData.pword">
+    <label>Phone Number</label>
+    <input type="number" name="pnum" ng-model="formData.pnum">
+    <button type="submit" class=" button button-block button-royal">Submit</button>
+    </form>
+        <pre>
+            {{formData}}
+        </pre>
+    </body>
+      
+  </ion-content>
+</ion-view>
