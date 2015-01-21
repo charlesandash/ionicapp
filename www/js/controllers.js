@@ -107,7 +107,7 @@
               { title: 'Cowbell', id: 6 }
             ];
         })
-        .controller('ViewPostCtrl', ['PostsService', function($scope, post ){
+        .controller('ViewPostCtrl', [ 'PostsService', function($scope, post){
             $scope.post= post;
         $scope.leftButtons = [{
                 type: 'button-icon icon ion-navicon',

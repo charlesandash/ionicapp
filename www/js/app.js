@@ -111,13 +111,12 @@ var testApp = angular.module('starter', ['ionic', 'starter.controllers'])
                   resolve: {
                       group: function ($stateParams, PostsService) {
                           console.log($stateParams.postId);
-                          return                      
-                          PostsService.getPost($stateParams.postId);
-                      }
+                return PostsService.getPost($stateParams.postId);
                   }
               }
           }
-      })
+      }
+  })
   
   .state('app.single', {
     url: "/playlists/:playlistId",
