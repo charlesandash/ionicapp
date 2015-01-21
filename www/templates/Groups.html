@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="en" data-ng-app="starter">
 
 <ion-view title="Groups">
@@ -23,17 +23,12 @@
         </div>
         <ion-list>
             <ion-item ng-repeat="group in groups" ui-sref="app.SingleGroup({groupId: group.id})">
-                {{group.name}} {{group.id}}
+                {{group.name}} 
+                {{group.id}}
             </ion-item>
 
         </ion-list>
     </ion-content>
-    <div class="button-bar bar-footer">
-        <button class="button button-clear">Make Group</button>
-    </div>
+        <button class="bar bar-footer bar-assertive" ng-click="changeState()">Make A New Group!</button>
 </ion-view>
-<div class="button-bar bar-footer">
-    <button class="button button-clear">Make Group</button>
-</div>
-
 </html>

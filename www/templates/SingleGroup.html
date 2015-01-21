@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 
 <ion-view title="{{group.name}}" left-buttons="leftButton" hide-back-button="{{hideBackButton}}">
     <ion-nav-buttons side="left">
@@ -23,14 +23,11 @@
             <div class="item item-divider">
                 Today
             </div>
-            <div class="list">
-                <label class="item item-input">
-                    <span class="input-label">Name</span>
-                    <input type="text" ng-model="group.id" />
-                </label>
-            </div>
+            <ion-item ng-repeat="post in posts" ui-sref='app.ViewPost({postId: post.id})' ng-class='{read: post.read}'>{{post.name}} {{post.content}}</ion-item>
 
         </ion-list>
     </ion-content>
+      <button class="bar bar-footer bar-assertive">Create A Post!</button>
+
 </ion-view>
     </html>

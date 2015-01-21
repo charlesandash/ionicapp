@@ -73,19 +73,13 @@
             $scope.formData = {};
 
             $scope.process = function () {
-                //     $http({
-                //          method : 'POST',
-                //          url: 'http://127.0.0.1/process.php',
-                //          data : $.param($scope.formData),
-                //          crossdomain: 'true',
-                //          datatype: 'jsonp',
-                //          headers : {'Content-Type' : 'application/x-www-form-urlencoded'}
                 $.ajax({
                     type: 'POST',
-                    url: 'http://54.149.59.111/process.php',
+                    url: 'http://54.149.59.111/create.php',
+                 data : {firstName : $scope.firstName, lastName : $scope.lastName, password : $scope.password} ,
 
 
-                    //        success(function(data) {
+                   
                     success: function (data) {
                         console.log(data);
                         if (!data.success) {
@@ -113,34 +107,24 @@
               { title: 'Cowbell', id: 6 }
             ];
         })
-        .controller('TestCtrl', function ($scope) {
-
-            $scope.products = [{
-                title: "Hello",
-                subject: "Chemistry",
-                name: "Ashwath",
-                id: 1
-            },
-
-            {
-                title: "Yes",
-                subject: "Physics",
-                name: "Malu",
-                id: 2
-            },
-            {
-                title: "World",
-                subject: "Math",
-                name: "Annie",
-                id: 3
-            }
-            ];
+        .controller('ViewPostCtrl', ['PostsService', function($scope, post ){
+            $scope.post= post;
+        $scope.leftButtons = [{
+                type: 'button-icon icon ion-navicon',
+                tap: function (e) {
+                    $scope.sideMenuController.toggleLeft();
+                }
+            }];
+            $scope.hideBackButton = true;
+    }])
+    
+            .controller('CreateGroupCtrl', function ($scope) {
         })
 
-        .controller('SingleGroupCtrl', function ($scope, group) {
-
+        .controller('SingleGroupCtrl', function ($scope, group, PostsService) {
+            $scope.posts = PostsService.getPosts();
             $scope.group = group;
-
+            
             $scope.leftButtons = [{
                 type: 'button-icon icon ion-navicon',
                 tap: function (e) {
@@ -150,10 +134,12 @@
             $scope.hideBackButton = true;
         })
 
-    .controller('GroupsCtrl', function ($scope, groups) {
+    .controller('GroupsCtrl', function ($scope, $state, groups) {
 
         $scope.groups = groups;
-
+        /*$scope.changeState = function(){
+            $state.transitionTo("CreateGroup");
+        }*/
         $scope.leftButtons = [{
             type: 'button-icon icon ion-navicon',
             tab: function (e) {
@@ -161,32 +147,8 @@
             }
         }];
         //    $scope.hideBackButton = true;
+       
     })
-
-       .controller('PostsCtrl', function () {
-           var allPosts = [{
-               title: "Hello",
-               subject: "Chemistry",
-               name: "Ashwath",
-               id: 1
-           },
-
-            {
-                title: "Yes",
-                subject: "Physics",
-                name: "Malu",
-                id: 2
-            },
-            {
-                title: "World",
-                subject: "Math",
-                name: "Annie",
-                id: 3
-            }
-           ];
-
-           this.products = allPosts;
-       })
 
 
     .service('GroupsService', function ($q) {
@@ -221,26 +183,43 @@
             }
         }
     })
+    
+     .service('PostsService', function ($q) {
+        return {
+            posts: [
+                {
+                    id: '1',
+                    name: 'Ash',
+                    content: 'What should we ask'
+                },
+                {
+                    id: '2',
+                    name: 'Sam',
+                    content: 'Hello'
+                }
+            ],
 
-    var allPosts = [{
-        title: "Hello",
-        subject: "Chemistry",
-        name: "Ashwath",
-        id: 1
-    },
+            getPosts: function () {
+                return this.posts;
+            },
+            getPost: function (postId) {
+                var dfd = $q.defer();
+                this.posts.forEach(function (post) {
+                    if (post.id === postId) {
+                       console.log("function");
+                        console.log(post.id)
+                        console.log(post.name);
+                        console.log("end function");
+                        dfd.resolve(post);
+                    }
+                })
+                return dfd.promise;
+            }
+        }
+    })
+    
 
-    {
-        title: "Yes",
-        subject: "Physics",
-        name: "Malu",
-        id: 2
-    },
-{
-    title: "World",
-    subject: "Math",
-    name: "Annie",
-    id: 3
-}];
+
 
 
 

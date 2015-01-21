@@ -6,33 +6,6 @@
 // 'starter.controllers' is found in controllers.js
 var testApp = angular.module('starter', ['ionic', 'starter.controllers'])
 
-/*
-testApp.controller('form2Ctrl', ["$scope", "$http", function($scope, $http){
-    $scope.formData = {};
-    $scope.processForm() = function(){};
-                $http({
-                  method : 'POST',
-                    url : 'ec2-54-149-59-111.us-west-2.compute.amazonaws.com/process.php',
-                    data : $.param($scope.formData),
-                    headers : {'Content-Type' : 'application/x-www-form-urlencoded'}
-                })
-
-                .success(function(data) {
-                    console.log(data);
-                    if (!data.success){
-                     $scope.errorUname = data.errors.uname;
-                    $scope.errorPword = data.error.pword;
-
-                    } else {
-
-                        $scope.message = data.message;
-                }
-            });
-
-            };
-}])
-*/
-
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -77,12 +50,13 @@ testApp.controller('form2Ctrl', ["$scope", "$http", function($scope, $http){
     }
   })
   
-  .state('app.test', {
-    url: "/test",
+   .state('app.CreateGroup', {
+    url: "/CreateGroup",
     views: {
+      
       'menuContent': {
-        templateUrl: "templates/test.html",
-        controller: "TestCtrl"
+        templateUrl: "templates/CreateGroup.html",
+        controller: 'CreateGroupCtrl'
       }
     }
   })
@@ -95,16 +69,6 @@ testApp.controller('form2Ctrl', ["$scope", "$http", function($scope, $http){
         }
       }
     })
-
-   .state('app.postItem', {
-      url: "/postItem",
-      views: {
-        'menuContent': {
-          templateUrl: "templates/post-item.html",
-          controller: 'PostsCtrl'
-        }
-      }
-   })
 
       .state('app.Groups', {
           url: "/Groups",
@@ -130,8 +94,25 @@ testApp.controller('form2Ctrl', ["$scope", "$http", function($scope, $http){
                   resolve: {
                       group: function ($stateParams, GroupsService) {
                           console.log($stateParams.groupId);
-                          //                          console.log("group is " + GroupsService.getGroup($stateParams.groupId).name);
+                                                    //console.log("group is " + //GroupsService.getGroup($stateParams.groupId).name);
                           return GroupsService.getGroup($stateParams.groupId);
+                      }
+                  }
+              }
+          }
+      })
+  
+.state('app.ViewPost', {
+          url: "app/SingleGroup/:postId",
+          views: {
+              'menuContent': {
+                  templateUrl: "templates/ViewPost.html",
+                  controller: 'ViewPostCtrl',
+                  resolve: {
+                      group: function ($stateParams, PostsService) {
+                          console.log($stateParams.postId);
+                          return                      
+                          PostsService.getPost($stateParams.postId);
                       }
                   }
               }
