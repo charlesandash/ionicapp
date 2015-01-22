@@ -109,7 +109,7 @@ var testApp = angular.module('starter', ['ionic', 'starter.controllers'])
                   templateUrl: "templates/ViewPost.html",
                   controller: 'ViewPostCtrl',
                   resolve: {
-                      group: function ($stateParams, PostsService) {
+                      post: function ($stateParams, PostsService) {
                           console.log($stateParams.postId);
                 return PostsService.getPost($stateParams.postId);
                   }

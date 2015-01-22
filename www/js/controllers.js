@@ -107,8 +107,11 @@
               { title: 'Cowbell', id: 6 }
             ];
         })
-        .controller('ViewPostCtrl', [ 'PostsService', function($scope, post){
+        .controller('ViewPostCtrl', function($scope, post){
             $scope.post= post;
+            console.log("Checking to see if post exists");
+            console.log(post.name);
+            console.log(post.id);
         $scope.leftButtons = [{
                 type: 'button-icon icon ion-navicon',
                 tap: function (e) {
@@ -116,7 +119,7 @@
                 }
             }];
             $scope.hideBackButton = true;
-    }])
+    })
     
             .controller('CreateGroupCtrl', function ($scope) {
         })
@@ -184,7 +187,7 @@
         }
     })
     
-     .service('PostsService', function ($q) {
+     .service('PostsService', ['$q', function ($q) {
         return {
             posts: [
                 {
@@ -216,7 +219,7 @@
                 return dfd.promise;
             }
         }
-    })
+    }])
     
 
 
