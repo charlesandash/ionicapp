@@ -102,6 +102,24 @@ var testApp = angular.module('starter', ['ionic', 'starter.controllers'])
           }
       })
   
+        .state('app.MakePost', {
+          url: "app/SingleGroup/:groupId",
+          views: {
+              'menuContent': {
+                  templateUrl: "templates/MakePost.html",
+                  controller: 'MakePostCtrl',
+                  resolve: {
+                      group: function ($stateParams, GroupsService) {
+                          console.log($stateParams.groupId);
+                                                    //console.log("group is " + //GroupsService.getGroup($stateParams.groupId).name);
+                          return GroupsService.getGroup($stateParams.groupId);
+                      }
+                  }
+              }
+          }
+      })
+  
+  
 .state('app.ViewPost', {
           url: "app/SingleGroup/:postId",
           views: {

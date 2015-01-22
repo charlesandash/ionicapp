@@ -123,6 +123,18 @@
     
             .controller('CreateGroupCtrl', function ($scope) {
         })
+        
+        .controller('MakePostCtrl', function ($scope, group){
+        $scope.group = group;  
+        
+        $scope.leftButtons = [{
+                type: 'button-icon icon ion-navicon',
+                tap: function (e) {
+                    $scope.sideMenuController.toggleLeft();
+                }
+            }];
+            $scope.hideBackButton = true;
+    })
 
         .controller('SingleGroupCtrl', function ($scope, group, PostsService) {
             $scope.posts = PostsService.getPosts();
